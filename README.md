@@ -17,51 +17,6 @@ All datasets are generated using a fixed random seed to ensure reproducibility a
 
 ---
 
-## System Architecture
-
-```text
-                 ┌────────────────────┐
-                 │  Data Generator    │
-                 │ (Faker + Seed 42)  │
-                 └─────────┬──────────┘
-                           │
-                           ▼
-                 ┌────────────────────┐
-                 │     Mock APIs      │
-                 │ Customers/Orders   │
-                 │     /Refunds       │
-                 └─────────┬──────────┘
-                           │
-                           ▼
-                 ┌────────────────────┐
-                 │ Ingestion Service  │
-                 │ Async Pagination   │
-                 │ Batch Processing   │
-                 └─────────┬──────────┘
-                           │
-                           ▼
-                 ┌────────────────────┐
-                 │    PostgreSQL      │
-                 │  Indexed Tables    │
-                 └─────────┬──────────┘
-                           │
-          ┌────────────────┴────────────────┐
-          ▼                                 ▼
- ┌───────────────────┐          ┌───────────────────┐
- │ Materialized View │          │   Redis Cache     │
- │ Customer Spend    │          │ Analytics Cache   │
- └─────────┬─────────┘          └─────────┬─────────┘
-           │                              │
-           └──────────────┬───────────────┘
-                          ▼
-                ┌────────────────────┐
-                │   Analytics API    │
-                │  FastAPI Endpoints │
-                └────────────────────┘
-```
-
----
-
 ## Technology Stack
 
 | Component         | Technology   |
@@ -117,6 +72,23 @@ All datasets are generated using a fixed random seed to ensure reproducibility a
 * Optimized SQL queries and async processing.
 
 ---
+### Setup Instructions
+* Clone Repository
+
+```bash
+git clone https://github.com/vanshjayswal08-byte/ecommerce-analytics.git
+cd ecommerce-analytics
+```
+* Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+* Run Using Docker
+```bash
+docker compose up -d --build
+```
+* Access API Docs
+http://localhost:8000/docs
 
 ## API Endpoints
 
@@ -147,9 +119,6 @@ Interactive API documentation is available at:
 http://localhost:8000/docs
 ```
 
-#Analytics Performance Proof
-<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/3711d29c-276d-4868-8ec8-6c81a8d7cc5e" />
-
 ---
 
 ## Performance
@@ -161,6 +130,10 @@ The system is designed to handle over **1.3 million records** while maintaining 
 * Materialized Views
 * Async processing
 * Batch ingestion
+
+
+# Analytics Performance Proof
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/3711d29c-276d-4868-8ec8-6c81a8d7cc5e" />
 
 ---
 
@@ -177,7 +150,7 @@ API Docs : http://localhost:8000/docs
 PostgreSQL : localhost:5432
 Redis : localhost:6379
 ```
-#Architecture Diagram
+# Architecture Diagram
 ## System Architecture
 
 ```mermaid
@@ -233,14 +206,34 @@ flowchart TD
     U --> W
     V --> W
 ```
-#Swagger Docs
+# Swagger Documentation
 <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/c0cf42ec-e5e8-4e6b-8aa2-efabb99e97d8" />
 
-#testing results 
+# Load Testing Results 
 
 <img width="347" height="499" alt="image" src="https://github.com/user-attachments/assets/2dac5033-33f7-4062-a1d6-55d4535d902d" />
 
 ---
+## Architecture & Optimization Decisions
+
+### Architecture
+
+The application follows a scalable pipeline architecture:
+
+Data Generator → Mock APIs → Ingestion Service → PostgreSQL → Redis Cache + Materialized Views → Analytics APIs
+
+### Optimization Decisions
+
+To ensure analytics responses remain below 2 seconds on a dataset containing over 1.3 million records, the following optimizations were implemented:
+
+* PostgreSQL indexes on frequently queried columns such as `customer_id`, `order_id`, and `created_at`.
+* Batch ingestion to reduce database write overhead.
+* Redis caching for frequently accessed analytics metrics.
+* Materialized Views for expensive aggregation queries like Top Customers by Spend.
+* Async FastAPI endpoints and HTTP clients for improved concurrency.
+* Pagination support to efficiently process large datasets.
+* Deterministic dataset generation using a fixed random seed for reproducibility.
+
 
 ## Author
 
