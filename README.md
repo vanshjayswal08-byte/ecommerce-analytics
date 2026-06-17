@@ -13,7 +13,7 @@ A complete walkthrough of the system architecture, ingestion pipeline, analytics
 🎥 Loom Demo:
 https://www.loom.com/share/8f82249702db4ef5a9e4c9ea1654cba5
 
-### Dataset Scale
+## Dataset Scale
 
 * **100,000 Customers**
 * **1,000,000 Orders**
@@ -42,25 +42,25 @@ All datasets are generated using a fixed random seed to ensure reproducibility a
 
 ## Features
 
-### Data Generation
+## Data Generation
 
 * Deterministic dataset generation using Faker.
 * Fixed seed for reproducibility.
 * Generates customers, orders, and refunds at scale.
 
-### Mock APIs
+## Mock APIs
 
 * Paginated endpoints.
 * Supports efficient ingestion.
 * Simulates external data providers.
 
-### Ingestion Pipeline
+## Ingestion Pipeline
 
 * Handles API pagination automatically.
 * Async batch processing.
 * Efficient bulk insertion into PostgreSQL.
 
-### Analytics APIs
+## Analytics APIs
 
 * Total Orders
 * Total Revenue
@@ -71,7 +71,7 @@ All datasets are generated using a fixed random seed to ensure reproducibility a
 * Revenue Trends
 * Top Customers by Spend
 
-### Performance Optimization
+## Performance Optimization
 
 * PostgreSQL indexing on critical columns.
 * Materialized Views for heavy aggregations.
@@ -79,7 +79,7 @@ All datasets are generated using a fixed random seed to ensure reproducibility a
 * Optimized SQL queries and async processing.
 
 ---
-### Setup Instructions
+## Setup Instructions
 * Clone Repository
 
 ```bash
@@ -99,7 +99,7 @@ http://localhost:8000/docs
 
 ## API Endpoints
 
-### Mock APIs
+## Mock APIs
 
 ```http
 GET /mock/customers
@@ -107,7 +107,7 @@ GET /mock/orders
 GET /mock/refunds
 ```
 
-### Analytics APIs
+## Analytics APIs
 
 ```http
 GET /analytics/total-orders
@@ -139,7 +139,7 @@ The system is designed to handle over **1.3 million records** while maintaining 
 * Batch ingestion
 
 
-# Analytics Performance Proof
+## Analytics Performance Proof
 <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/3711d29c-276d-4868-8ec8-6c81a8d7cc5e" />
 
 ---
@@ -157,8 +157,8 @@ API Docs : http://localhost:8000/docs
 PostgreSQL : localhost:5432
 Redis : localhost:6379
 ```
-# Architecture Diagram
-## System Architecture
+## Architecture Diagram
+# System Architecture
 
 ```mermaid
 flowchart TD
@@ -213,23 +213,24 @@ flowchart TD
     U --> W
     V --> W
 ```
-# Swagger Documentation
+
+## Swagger Documentation
 <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/c0cf42ec-e5e8-4e6b-8aa2-efabb99e97d8" />
 
-# Load Testing Results 
+## Load Testing Results 
 
 <img width="347" height="499" alt="image" src="https://github.com/user-attachments/assets/2dac5033-33f7-4062-a1d6-55d4535d902d" />
 
 ---
 ## Architecture & Optimization Decisions
 
-### Architecture
+# Architecture
 
 The application follows a scalable pipeline architecture:
 
 Data Generator → Mock APIs → Ingestion Service → PostgreSQL → Redis Cache + Materialized Views → Analytics APIs
 
-### Optimization Decisions
+# Optimization Decisions
 
 To ensure analytics responses remain below 2 seconds on a dataset containing over 1.3 million records, the following optimizations were implemented:
 
