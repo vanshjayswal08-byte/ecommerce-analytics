@@ -147,6 +147,9 @@ Interactive API documentation is available at:
 http://localhost:8000/docs
 ```
 
+#Analytics Performance Proof
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/3711d29c-276d-4868-8ec8-6c81a8d7cc5e" />
+
 ---
 
 ## Performance
