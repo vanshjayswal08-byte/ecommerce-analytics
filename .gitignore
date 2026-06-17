@@ -1,0 +1,12 @@
+# Python junk
+__pycache__/
+*.pyc
+
+# CSV Data (1.3M records should not be pushed to GitHub)
+data/*.csv
+
+# Docker/Environment
+.env
+.venv/
+.idea/
+.vscode/
