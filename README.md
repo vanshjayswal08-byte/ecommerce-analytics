@@ -6,6 +6,13 @@ A high-performance backend analytics platform built with **Python, FastAPI, Post
 
 This project was designed to demonstrate backend engineering concepts including data ingestion, API design, database optimization, caching, materialized views, batch processing, and scalable analytics architecture.
 
+## Project Walkthrough Video
+
+A complete walkthrough of the system architecture, ingestion pipeline, analytics APIs, database design, caching strategy, and load testing results.
+
+🎥 Loom Demo:
+https://www.loom.com/share/8f82249702db4ef5a9e4c9ea1654cba5
+
 ### Dataset Scale
 
 * **100,000 Customers**
