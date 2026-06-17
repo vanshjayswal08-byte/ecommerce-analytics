@@ -174,6 +174,65 @@ API Docs : http://localhost:8000/docs
 PostgreSQL : localhost:5432
 Redis : localhost:6379
 ```
+#Architecture Diagram
+## System Architecture
+
+```mermaid
+flowchart TD
+
+    A[Data Generator<br/>Faker + Seed 42]
+
+    A --> B[Mock API Service]
+
+    B --> B1["/mock/customers"]
+    B --> B2["/mock/orders"]
+    B --> B3["/mock/refunds"]
+
+    B1 --> C[Ingestion Service]
+    B2 --> C
+    B3 --> C
+
+    C --> D[Pagination Handler]
+    D --> E[Batch Processing]
+
+    E --> F[(PostgreSQL)]
+
+    F --> G[Customers Table]
+    F --> H[Orders Table]
+    F --> I[Refunds Table]
+
+    H --> J[Indexes]
+    I --> J
+
+    F --> K[Materialized Views]
+    F --> L[Revenue Aggregations]
+
+    K --> M[Analytics Service]
+    L --> M
+
+    N[(Redis Cache)] --> M
+
+    M --> O["/analytics/total-orders"]
+    M --> P["/analytics/total-revenue"]
+    M --> Q["/analytics/total-refunds"]
+    M --> R["/analytics/net-revenue"]
+    M --> S["/analytics/average-order-value"]
+    M --> T["/analytics/repeat-customer-revenue"]
+    M --> U["/analytics/revenue-trends"]
+    M --> V["/analytics/top-customers"]
+
+    O --> W[Dashboard / Client]
+    P --> W
+    Q --> W
+    R --> W
+    S --> W
+    T --> W
+    U --> W
+    V --> W
+```
+#Swagger Docs
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/c0cf42ec-e5e8-4e6b-8aa2-efabb99e97d8" />
+
 #testing results 
 
 <img width="347" height="499" alt="image" src="https://github.com/user-attachments/assets/2dac5033-33f7-4062-a1d6-55d4535d902d" />
